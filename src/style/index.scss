@@ -1,0 +1,465 @@
+@import 'normalizer';
+
+/* You can add global styles to this file, and also import other style files */
+
+
+$background: #bdd0d2;
+$black: #225378;
+$initial: #1695a3;
+$initial10: #acf0f2;
+$white: #fff;
+
+html {
+  width: 100%;
+  height: 100%;
+  text-size-adjust: 100%;
+  background-color: $background;
+}
+
+body, div {
+  box-sizing: border-box;
+}
+
+body {
+  color: $initial;
+  font-family: -apple-system, "Roboto", "Helvetica Neue", sans-serif;
+  margin: 0px;
+  position:relative;
+  height: 100vh;
+
+}
+
+h1,h2,h3,h4 {
+  font-weight: normal;
+  margin-bottom: 0px;
+}
+
+.view {
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  will-change: transform;
+}
+
+
+header {
+  display: block;
+  background-color: currentColor;
+  border-radius: 0px 0px 10vw 10vw;
+  height: 120px;
+  position: relative;
+
+  h1 {
+    box-sizing: border-box;
+    color: #fff;
+    padding-top: 20px;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  img {
+    margin-top: 20px;
+    width: 25vw;
+  }
+
+
+  .back {
+    position: absolute;
+
+    top: 5px;
+    left: 10px;
+
+    img {
+      width: 32px;
+    }
+  }
+
+}
+
+app-fab {
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
+  z-index: 1000;
+
+  button {
+    background-color: #fff;
+    padding: 25px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 9px 4px rgba(0, 0, 0, 0.14), 0 4px 5px rgba(0, 0, 0, 0.1);
+  }
+
+
+}
+
+
+
+
+
+.fb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrap {
+  width: 100%;
+  height: calc(100% - 90px);
+  overflow: scroll;
+  margin-top: -40px;
+  perspective: 1500px;
+  margin-bottom: 0px;
+}
+
+hr {
+  border-bottom: 2px solid currentColor;
+  width: 80%;
+  opacity: 0.8;
+}
+
+/* Base for card */
+.card {
+
+  display: block;
+  width: 96%;
+  min-height: 100px;
+  border-radius: 15px;
+  background-color: $white;
+  padding: 10px 20px 5px 20px;
+  margin-bottom: 10px;
+  min-height: 135px;
+
+  &.intro {
+    width: 90%;
+    text-align:center;
+    margin-top: 20px;
+  }
+
+}
+
+.item {
+
+  color: $black;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    width: 120px;
+    margin-left: 25px;
+  }
+
+  &:last-child {
+    margin-bottom: 30px;
+  }
+
+}
+
+/* Card item */
+.full {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.card_ct {
+  @extend .card;
+  overflow: hidden;
+  background-color: $initial;
+  padding: 0;
+  position: relative;
+  height: 125px;
+  z-index: 50;
+}
+
+.card_main {
+  border-radius: 15px;
+  @extend .full;
+  z-index: 10;
+  transform: translate3d(0, 0, 0);
+  background-color: $white;
+  padding: 10px 20px 5px 20px;
+}
+
+.card_down {
+  @extend .full;
+  z-index: 9;
+
+  &.delete {
+    border-radius: 15px;
+    background-color:#932222;
+    color: #fff;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 30px;
+  }
+
+}
+
+
+
+
+app-track-time, app-track-counter {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  height: 105px;
+}
+
+.card_icon {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+
+h3.card_title {
+  position: absolute;
+  margin-top: 0px;
+  text-transform: uppercase;
+  color: $black;
+}
+
+.record {
+  position: absolute;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  top: 28px;
+  left: 0px;
+  background-color: $initial10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .btn {
+    display: block;
+    width: 50%;
+    height: 50%;
+  }
+
+  .btn_small {
+    display: block;
+    width: 40%;
+    height: 40%;
+  }
+
+}
+
+.amount {
+
+  position: absolute;
+  top: 38px;
+  right: 0px;
+  font-size: 40px;
+  color: $black;
+
+  &.today {
+    font-size: 1em;
+    top: 85px;
+    color: $initial;
+    right: 2px;
+  }
+
+}
+
+.record-start {
+  width: 60px;
+  text-align:center;
+  position: absolute;
+  top: 75px;
+  left: 0px;
+  font-size: 0.8em;
+}
+
+
+.stats {
+  p {
+    border-bottom: 1px solid #eaeaea;
+    position: relative;
+
+    span {
+      position: absolute;
+      right: 0px;
+      color: $black;
+      font-weight: bold;
+    }
+
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.card button {
+  margin-top: 15px;
+  font-size: 1.1em;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: $initial;
+  color: $white;
+}
+
+.table {
+  h3 {
+    text-align: center;
+    color: $black;
+  }
+  min-height: auto;
+}
+
+
+.reload-app {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: $black;
+  color: #fff;
+  padding: 10px;
+  padding-bottom: 20px;
+  text-align: center;
+  width: 80%;
+  transform: translate(-50%, -50%);
+  z-index: 10001;
+  border-radius: 15px;
+
+  button {
+    padding: 8px 15px 8px 15px;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+
+}
+
+.modal {
+
+  z-index: 10000;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: $black;
+    opacity: 0.4;
+  }
+
+}
+
+
+
+.addTrack {
+  box-sizing: border-box;
+  position: relative;
+  height: 173px;
+  min-height: 173px;
+  box-shadow: 3px 3px 9px 4px rgba(0, 0, 0, 0.14),
+    0 4px 5px rgba(0, 0, 0, 0.1);
+
+  will-change: transform;
+
+  div.close {
+    position: absolute;
+    top: 10px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+  }
+
+  h2 {
+    font-weight: bolder;
+    font-size: 1em;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+  }
+
+  button {
+    position:absolute;
+    bottom: 20px;
+    right: 20px;
+    font-weight: bolder;
+    border-radius: 5px;
+    background-color: #1695a3;
+    color: #fff;
+    padding: 8px 25px 8px 25px;
+    font-size: 1em;
+  }
+
+
+  input {
+    box-sizing: border-box;
+    padding: 5px 0px;
+    border: 0px;
+    border-bottom: 2px solid #1695a3;
+    width: 90%;
+    position: absolute;
+    left: 20px;
+    top: 55px;
+    transition: all 0.5s ease-in-out;
+
+    &:focus {
+      outline-width: 0;
+      border-bottom: 2px solid #225378;
+    }
+
+  }
+
+  .kind {
+
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+
+    .ele {
+      opacity: 0.3;
+      font-size: 0.8em;
+      width: 62px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: bottom;
+
+      img {
+        width: 60%;
+      }
+
+      &.enabled {
+        opacity: 1;
+      }
+
+    }
+  }
+
+}
