@@ -1,12 +1,12 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
-
-
+import { connect } from 'preact-redux';
 
 import Header from './header';
 import Home from './home';
 import Fab from './ui/fab.component';
 import AddTrack from './addtrack';
+import TrackList from './tracklist';
 
 export default class App extends Component {
   /** Gets fired when the route changes.
@@ -31,6 +31,7 @@ export default class App extends Component {
       <Header />
       <div class="wrap fb">
         {showAdd && <AddTrack close={this.closeMenu} /> }
+        <TrackList />
       </div>
         {!showAdd && <Fab click={this.clickMenu} /> }
      </div>

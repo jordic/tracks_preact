@@ -83,8 +83,8 @@ header {
 
 app-fab {
   position: absolute;
-  bottom: 60px;
-  right: 60px;
+  bottom: 15px;
+  right: 15px;
   z-index: 1000;
 
   button {
@@ -126,6 +126,10 @@ hr {
   border-bottom: 2px solid currentColor;
   width: 80%;
   opacity: 0.8;
+}
+
+.track_list {
+  width: 100%;
 }
 
 /* Base for card */
@@ -185,6 +189,8 @@ hr {
   position: relative;
   height: 125px;
   z-index: 50;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 .card_main {
@@ -264,6 +270,17 @@ h3.card_title {
     height: 40%;
   }
 
+}
+
+
+app-record-button {
+  display: block;
+  div {
+    background-color: $initial;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
 }
 
 .amount {
