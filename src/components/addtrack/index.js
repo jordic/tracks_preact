@@ -25,8 +25,14 @@ export default class AddTrack extends Component {
     this.Input.focus();
   }
 
+  onKeyPress = (event) => {
+    if(event.keyCode == 13) {
+      this.addAction();
+    }
+  }
+
   addAction() {
-    console.log('context', this.context, this);
+    // console.log('context', this.context, this);
     if (this.Input.value.length < 2) {
       this.Input.focus();
       return;
@@ -53,6 +59,7 @@ export default class AddTrack extends Component {
 
       <input name="desc" type="text"
         ref={(input) => this.Input = input }
+        onKeyPress={this.onKeyPress}
         placeholder="Add your track title" />
 
       <div className="kind">
