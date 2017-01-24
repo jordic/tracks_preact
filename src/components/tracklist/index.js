@@ -5,6 +5,7 @@ import { homeTracks } from '../../store/selectors';
 import * as actions from '../../store/actions';
 import { TrackCounter } from '../ui/trackcounter.component';
 import { TrackRecord } from '../ui/trackrecord.component';
+import SwipeToDelete from '../ui/swipedelete';
 
 
 const mapStoreToProps = (state) => ({
@@ -45,8 +46,8 @@ export default class TrackList extends Component {
     return (
       <div class="track_list">
         { tracks.map(track => (
-        <div class="card_ct">
-          <div class="card_main">
+        <SwipeToDelete className="card_ct">
+          <div className="card_main">
             { track.kind == 'counter' &&
               <TrackCounter track={track} click={this.trackClick(track.id)} /> }
             { track.kind == 'timer' &&
@@ -54,10 +55,10 @@ export default class TrackList extends Component {
                 stop={this.trackStop(track.id)} />
             }
           </div>
-          <div class="card_down delete">
+          <div className="card_down delete">
             DELETE
           </div>
-        </div>
+        </SwipeToDelete>
         ))}
       </div>
     )
