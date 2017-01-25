@@ -166,7 +166,7 @@ module.exports = {
 		publicPath: '/',
 		contentBase: './src',
 		historyApiFallback: true,
-		open: true,
+		open: false,
 		proxy: {
 			// OPTIONAL: proxy configuration:
 			// '/optional-prefix/**': { // path pattern to rewrite

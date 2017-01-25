@@ -5,7 +5,7 @@ import { homeTracks } from '../../store/selectors';
 import * as actions from '../../store/actions';
 import { TrackCounter } from '../ui/trackcounter.component';
 import { TrackRecord } from '../ui/trackrecord.component';
-import SwipeToDelete from '../ui/swipedelete';
+import { Swipe } from '../ui/swipe';
 
 
 const mapStoreToProps = (state) => ({
@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   trackStop(id) {
     dispatch(actions.trackStop(id));
+  },
+  trackDelete(id) {
+    dispatch(actions.trackDelete(id));
   }
 })
 
@@ -40,14 +43,16 @@ export default class TrackList extends Component {
     this.props.trackStop(id);
   }
 
-
+  delete = (id) => (ev) => {
+    this.props.trackDelete(id);
+  }
 
   render({tracks}, state) {
     return (
       <div class="track_list">
         { tracks.map(track => (
-        <SwipeToDelete className="card_ct">
-          <div className="card_main">
+        <Swipe className="card_ct" onSwipeRight={this.delete(track.id)} key={track.id}>
+          <div class="card_main">
             { track.kind == 'counter' &&
               <TrackCounter track={track} click={this.trackClick(track.id)} /> }
             { track.kind == 'timer' &&
@@ -58,7 +63,7 @@ export default class TrackList extends Component {
           <div className="card_down delete">
             DELETE
           </div>
-        </SwipeToDelete>
+        </Swipe>
         ))}
       </div>
     )
