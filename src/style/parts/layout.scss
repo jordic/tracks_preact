@@ -1,0 +1,82 @@
+header {
+  display: block;
+  background-color: currentColor;
+  border-radius: 0px 0px 10vw 10vw;
+  height: 120px;
+  position: relative;
+
+  h1 {
+    box-sizing: border-box;
+    color: #fff;
+    padding-top: 20px;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  img {
+    margin-top: 20px;
+    width: 25vw;
+  }
+
+
+  .back {
+    position: absolute;
+
+    top: 5px;
+    left: 10px;
+
+    img {
+      width: 32px;
+    }
+  }
+
+}
+
+app-fab {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+
+  button {
+    background-color: #fff;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 3px 3px 9px 4px rgba(0, 0, 0, 0.14), 0 4px 5px rgba(0, 0, 0, 0.1);
+  }
+
+
+}
+
+.fb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrap {
+  width: 100%;
+  height: calc(100% - 90px);
+  overflow: scroll;
+  margin-top: -40px;
+  perspective: 1500px;
+  margin-bottom: 0px;
+}
+
+hr {
+  border-bottom: 2px solid currentColor;
+  width: 80%;
+  opacity: 0.8;
+}
+
+.track_list {
+  width: 100%;
+}

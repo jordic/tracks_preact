@@ -36,6 +36,13 @@ export default class AddTrack extends Component {
     }
   }
 
+  close() {
+    dRaf(() => {
+      this.setState({acss: ''});
+      setTimeout(this.props.close, 200);
+    })
+  }
+
   addAction() {
     // console.log('context', this.context, this);
     if (this.Input.value.length < 2) {
@@ -50,13 +57,14 @@ export default class AddTrack extends Component {
     }));
     // components are recycled... clean it..
     this.Input.value = '';
-    this.props.close();
+    // this.props.close();
+    this.close();
   }
 
   render(props, {kind, acss}) {
     return (
       <div className={ 'card addTrack ' + (acss || '')}>
-        <div class="close" onClick={props.close} >
+        <div class="close" onClick={this.close.bind(this)} >
           <img src="assets/close.svg" />
         </div>
 
