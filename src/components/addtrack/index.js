@@ -1,16 +1,18 @@
-import {h, Component} from 'preact';
+import {h, Component } from 'preact';
 
 import style from './style';
 import * as actions from '../../store/actions';
 
-
+const dRaf = (fn) => requestAnimationFrame(
+  () => requestAnimationFrame(fn));
 
 export default class AddTrack extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      kind: 'counter'
+      kind: 'counter',
+      acss: '',
     }
   }
 
@@ -23,6 +25,9 @@ export default class AddTrack extends Component {
 
   componentDidMount() {
     this.Input.focus();
+    dRaf(() =>{
+      this.setState({acss: 'in'})
+    })
   }
 
   onKeyPress = (event) => {
@@ -48,9 +53,9 @@ export default class AddTrack extends Component {
     this.props.close();
   }
 
-  render(props, {kind}) {
+  render(props, {kind, acss}) {
     return (
-      <div className="card addTrack">
+      <div className={ 'card addTrack ' + (acss || '')}>
         <div class="close" onClick={props.close} >
           <img src="assets/close.svg" />
         </div>
@@ -66,13 +71,13 @@ export default class AddTrack extends Component {
         <div
           className={'ele ' + (kind=='counter' ? 'enabled' : '')}
           onClick={ this.setCounter  }>
-          <img src="assets/counter.svg" />
+          <img src="./assets/counter.svg" />
           <label>Counter</label>
         </div>
         <div
           className={'ele ' + (kind=='timer' ? 'enabled' : '')}
           onClick={ this.setTimer }>
-          <img src="assets/timer.svg" />
+          <img src="./assets/timer.svg" />
           <label>Timer</label>
         </div>
       </div>
