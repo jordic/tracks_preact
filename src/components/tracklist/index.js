@@ -5,7 +5,7 @@ import { homeTracks } from '../../store/selectors';
 import * as actions from '../../store/actions';
 import { TrackCounter } from '../ui/trackcounter.component';
 import { TrackRecord } from '../ui/trackrecord.component';
-import { Swipe } from '../ui/swipe';
+import { Swipe } from '../ui/swipe.reactive';
 
 
 const mapStoreToProps = (state) => ({

@@ -1,10 +1,7 @@
 import {h, Component } from 'preact';
 
-import style from './style';
 import * as actions from '../../store/actions';
-
-const dRaf = (fn) => requestAnimationFrame(
-  () => requestAnimationFrame(fn));
+import { dRaf } from '../../lib/utils';
 
 export default class AddTrack extends Component {
 

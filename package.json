@@ -14,8 +14,8 @@
   },
   "keywords": [
     "preact",
-    "boilerplate",
-    "webpack"
+    "pwa",
+    "track time"
   ],
   "license": "MIT",
   "author": "Jordi collell <j@tmpo.io>",
@@ -76,7 +76,7 @@
   "dependencies": {
     "hammerjs": "^2.0.8",
     "node-sass": "^4.3.0",
-    "preact": "^7.0.0",
+    "preact": "beta",
     "preact-compat": "^3.0.0",
     "preact-redux": "^2.0.0",
     "preact-router": "^2.0.0",
