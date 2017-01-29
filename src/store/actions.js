@@ -55,3 +55,19 @@ export function trackDelete(id) {
     payload: id
   };
 }
+
+
+export const mapDispatchToProps = (dispatch) => ({
+  trackCount(id) {
+    dispatch(trackCount(id));
+  },
+  trackStart(id) {
+    dispatch(trackStart(id));
+  },
+  trackStop(id) {
+    dispatch(trackStop(id));
+  },
+  trackDelete(id) {
+    dispatch(trackDelete(id));
+  }
+})

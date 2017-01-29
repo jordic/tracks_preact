@@ -3,37 +3,49 @@ import { Router } from 'preact-router';
 import { connect } from 'preact-redux';
 
 import Header from './header';
-import Home from './home';
 import Fab from './ui/fab.component';
 import AddTrack from './addtrack';
 import TrackList from './tracklist';
+import TrackDetails from './trackdetails';
 
 export default class App extends Component {
-  /** Gets fired when the route changes.
-   *	@param {Object} event		"change" event from [preact-router](http://git.io/preact-router)
-   *	@param {string} event.url	The newly routed URL
-   */
-  handleRoute = e => {
-    this.currentUrl = e.url;
-  };
 
-  clickMenu = e => {
+
+  showAdd = e => {
     this.setState({showAdd: true})
   };
 
-  closeMenu = e => {
+  closeAdd = e => {
     this.setState({showAdd: false})
   }
 
-  render(props, {showAdd}) {
+  trackDetails = (id) => {
+    this.setState({
+      showAdd: false,
+      showTrack: true,
+      trackId: id
+    })
+  }
+
+  gotoHome = (ev) => {
+    this.setState({
+      showTrack: false,
+      showAdd: false,
+    })
+  }
+
+  render(props, {showAdd, showTrack, trackId}) {
     return (
      <div id="app">
-      <Header />
-      <div class="wrap fb">
-        {showAdd && <AddTrack close={this.closeMenu} /> }
-        <TrackList />
-      </div>
-        {!showAdd && <Fab click={this.clickMenu} /> }
+      <Header header={showTrack} back={this.gotoHome} />
+      {!showTrack && <div class="wrap fb">
+        {showAdd && <AddTrack close={this.closeAdd} /> }
+        <TrackList trackClick={this.trackDetails}  />
+      </div> }
+      {showTrack &&
+        <TrackDetails trackId={trackId} />
+      }
+      {!showAdd && <Fab click={this.showAdd} /> }
      </div>
     );
   }

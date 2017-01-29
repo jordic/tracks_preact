@@ -12,39 +12,33 @@ const mapStoreToProps = (state) => ({
   tracks: homeTracks(state)
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  trackClick(id) {
-    dispatch(actions.trackCount(id));
-  },
-  trackStart(id) {
-    dispatch(actions.trackStart(id));
-  },
-  trackStop(id) {
-    dispatch(actions.trackStop(id));
-  },
-  trackDelete(id) {
-    dispatch(actions.trackDelete(id));
-  }
-})
-
-@connect(mapStoreToProps, mapDispatchToProps)
+@connect(mapStoreToProps, actions.mapDispatchToProps)
 export default class TrackList extends Component {
 
-  trackClick = (id) => (ev) => {
+  trackCount = (id) => (ev) => {
     //alert('click', id);
-    this.props.trackClick(id);
+    this.props.trackCount(id);
+    ev.stopPropagation();
   }
 
   trackStart = (id) => (ev) => {
     this.props.trackStart(id);
+    ev.stopPropagation();
+
   }
 
   trackStop = (id) => (ev) => {
     this.props.trackStop(id);
+    ev.stopPropagation();
   }
 
   delete = (id) => (ev) => {
     this.props.trackDelete(id);
+  }
+
+  trackClick = (id) => (ev) => {
+    // console.log(e);
+    this.props.trackClick(id);
   }
 
   render({tracks}, state) {
@@ -52,9 +46,9 @@ export default class TrackList extends Component {
       <div class="track_list">
         { tracks.map(track => (
         <Swipe className="card_ct" onSwipeRight={this.delete(track.id)} key={track.id}>
-          <div class="card_main">
+          <div class="card_main" onclick={ this.trackClick(track.id) }>
             { track.kind == 'counter' &&
-              <TrackCounter track={track} click={this.trackClick(track.id)} /> }
+              <TrackCounter track={track} click={this.trackCount(track.id)} /> }
             { track.kind == 'timer' &&
               <TrackRecord track={track} start={this.trackStart(track.id)}
                 stop={this.trackStop(track.id)} />

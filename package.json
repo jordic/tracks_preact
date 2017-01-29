@@ -74,7 +74,6 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
-    "hammerjs": "^2.0.8",
     "node-sass": "^4.3.0",
     "preact": "beta",
     "preact-compat": "^3.0.0",

@@ -6,7 +6,7 @@ export default function Header(props) {
   let back = ""
   if(props.header) {
     back = (
-      <div className="back">
+      <div className="back" onclick={props.back}>
         <img src="assets/arrow.svg" alt="Left arrow" />
       </div>
     )

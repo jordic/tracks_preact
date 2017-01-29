@@ -9,6 +9,9 @@ import 'rxjs/add/observable/timer';
 const leadZero = str => (str.length === 1) ? '0' + str : str;
 
 export function timePipe(v) {
+  if (!v) {
+    return '00:00:00';
+  }
 	let seconds = leadZero('' + (Math.floor(v / 1000) % 60));
 	let minutes = leadZero('' + Math.floor(((v / (60000)) % 60)) );
 	let hours = leadZero('' + Math.floor((v / (3600000))));
