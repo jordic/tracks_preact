@@ -3,6 +3,7 @@ import { connect } from 'preact-redux';
 
 import { homeTracks } from '../../store/selectors';
 import * as actions from '../../store/actions';
+import AddTrack from '../addtrack';
 import { TrackCounter } from '../ui/trackcounter.component';
 import { TrackRecord } from '../ui/trackrecord.component';
 import { Swipe } from '../ui/swipe.reactive';
@@ -41,8 +42,10 @@ export default class TrackList extends Component {
     this.props.trackClick(id);
   }
 
-  render({tracks}, state) {
+  render({tracks, showAdd, close}, state) {
     return (
+    <div class="wrap fb">
+      {showAdd && <AddTrack close={close} /> }
       <div class="track_list">
         { tracks.map(track => (
         <Swipe className="card_ct" onSwipeRight={this.delete(track.id)} key={track.id}>
@@ -60,6 +63,7 @@ export default class TrackList extends Component {
         </Swipe>
         ))}
       </div>
+    </div>
     )
   }
 

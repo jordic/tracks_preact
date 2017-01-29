@@ -16,6 +16,7 @@ export default class App extends Component {
   };
 
   closeAdd = e => {
+    console.log('called?')
     this.setState({showAdd: false})
   }
 
@@ -38,10 +39,11 @@ export default class App extends Component {
     return (
      <div id="app">
       <Header header={showTrack} back={this.gotoHome} />
-      {!showTrack && <div class="wrap fb">
-        {showAdd && <AddTrack close={this.closeAdd} /> }
-        <TrackList trackClick={this.trackDetails}  />
-      </div> }
+      {!showTrack && <TrackList
+          close={this.closeAdd}
+          showAdd={showAdd}
+          trackClick={this.trackDetails}  />
+      }
       {showTrack &&
         <TrackDetails trackId={trackId} />
       }
