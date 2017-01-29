@@ -35,19 +35,29 @@ export default class App extends Component {
     })
   }
 
+  getStyle = (el, track) => {
+    if(el == 'list') {
+      let pos = (track) ? '-100%' : '0';
+      return `transform: translate3d(${pos},0,0);`;
+    }
+    let p = (track) ? '0' : '100%';
+    return `transform: translate3d(${p},0,0);`;
+  }
+
   render(props, {showAdd, showTrack, trackId}) {
     return (
      <div id="app">
       <Header header={showTrack} back={this.gotoHome} />
-      {!showTrack && <TrackList
+      <TrackList
           close={this.closeAdd}
           showAdd={showAdd}
-          trackClick={this.trackDetails}  />
-      }
-      {showTrack &&
-        <TrackDetails trackId={trackId} />
-      }
-      {!showAdd && <Fab click={this.showAdd} /> }
+          trackClick={this.trackDetails}
+          style={this.getStyle('list', showTrack)} />
+
+      <TrackDetails trackId={trackId}
+          style={this.getStyle('detail', showTrack)} />
+
+      {!showAdd && !showTrack && <Fab click={this.showAdd} /> }
      </div>
     );
   }

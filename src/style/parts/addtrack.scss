@@ -1,3 +1,5 @@
+
+
 .addTrack {
   box-sizing: border-box;
   position: relative;
@@ -8,10 +10,10 @@
 
   will-change: transform;
   transform: translate3d(0, -100px, -200px) rotateX(80deg);
-  transition: transform 200ms ease-out;
 
   &.in {
     transform: translate3d(0, 0, 0) rotateX(0deg);
+
   }
 
   div.close {

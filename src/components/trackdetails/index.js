@@ -32,10 +32,10 @@ export default class TrackDetails extends Component {
 
   }
 
-  render({track}, state) {
+  render({track, style}, state) {
     return (
-      <div className="wrap fb">
-        <div class="card">
+      <div className="wrap fb" style={style}>
+        <div class="card interior">
           { track.kind == 'counter' &&
               <TrackCounter track={track} click={this.trackCount(track.id)} /> }
           { track.kind == 'timer' &&

@@ -42,9 +42,9 @@ export default class TrackList extends Component {
     this.props.trackClick(id);
   }
 
-  render({tracks, showAdd, close}, state) {
+  render({tracks, showAdd, close, style}, state) {
     return (
-    <div class="wrap fb">
+    <div class="wrap fb" style={style} >
       {showAdd && <AddTrack close={close} /> }
       <div class="track_list">
         { tracks.map(track => (
@@ -58,7 +58,8 @@ export default class TrackList extends Component {
             }
           </div>
           <div className="card_down delete">
-            DELETE
+            <img src="./assets/trash.svg"
+              width="24" /> DELETE
           </div>
         </Swipe>
         ))}

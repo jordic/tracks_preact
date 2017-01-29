@@ -6,14 +6,18 @@
   min-height: 100px;
   border-radius: 15px;
   background-color: $white;
-  padding: 10px 20px 5px 20px;
+  padding: 5px 10px 0px 10px;
   margin-bottom: 10px;
-  min-height: 135px;
+  min-height: 115px;
 
   &.intro {
     width: 90%;
     text-align:center;
     margin-top: 20px;
+  }
+
+  &.interior {
+    padding: 15px 20px 10px 20px;
   }
 
 }
@@ -53,7 +57,7 @@
   background-color: $initial;
   padding: 0;
   position: relative;
-  height: 125px;
+  height: 90px;
   z-index: 50;
   margin: 0 auto;
   margin-bottom: 10px;
@@ -66,6 +70,7 @@
   transform: translate3d(0, 0, 0);
   background-color: $white;
   padding: 10px 20px 5px 20px;
+
 }
 
 .card_down {
@@ -74,13 +79,23 @@
 
   &.delete {
     border-radius: 15px;
-    background-color:#932222;
+    background-color:#e64d35;
     color: #fff;
     display: flex;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-left: 30px;
+
   }
 
+  img {
+    margin-bottom: 5px;
+  }
+
+}
+
+
+.card.table {
+  padding: 10px 20px 5px 20px;
 }

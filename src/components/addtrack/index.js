@@ -8,8 +8,9 @@ export default class AddTrack extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      kind: 'counter',
+      kind: 'timer',
       acss: '',
+      style: ''
     }
   }
 
@@ -21,10 +22,15 @@ export default class AddTrack extends Component {
   setCounter = () => this.setType('counter');
 
   componentDidMount() {
-    this.Input.focus();
+    this.setState({
+      acss: '',
+      style: 'transition: transform 200ms ease-out'
+    });
+    this.forceUpdate();
     dRaf(() =>{
-      this.setState({acss: 'in'})
-    })
+      this.Input.focus();
+      this.setState({acss: 'in'});
+    });
   }
 
   onKeyPress = (event) => {
@@ -58,9 +64,10 @@ export default class AddTrack extends Component {
     this.close();
   }
 
-  render(props, {kind, acss}) {
+  render(props, {kind, acss, style}) {
     return (
-      <div className={ 'card addTrack ' + (acss || '')}>
+      <div className={ 'card anim addTrack ' + (acss || '')}
+        style={style}>
         <div class="close" onClick={this.close.bind(this)} >
           <img src="assets/close.svg" />
         </div>

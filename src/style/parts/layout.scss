@@ -6,6 +6,7 @@ header {
   position: relative;
 
   h1 {
+    font-size: 1.5em;
     box-sizing: border-box;
     color: #fff;
     padding-top: 20px;
@@ -24,7 +25,7 @@ header {
   .back {
     position: absolute;
 
-    top: 5px;
+    top: 0px;
     left: 10px;
 
     img {
@@ -63,12 +64,17 @@ app-fab {
 }
 
 .wrap {
+  position: absolute;
+  top: 70px;
   width: 100%;
-  height: calc(100% - 90px);
-  overflow: scroll;
-  margin-top: -40px;
+  height: calc(100% - 70px);
+  overflow: hidden;
+  overflow-y: scroll;
+  // margin-top: -40px;
   perspective: 1500px;
   margin-bottom: 0px;
+  transition: transform 0.3s ease-out;
+  touch-action: pan-y;
 }
 
 hr {
