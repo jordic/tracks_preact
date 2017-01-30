@@ -23,12 +23,6 @@ const current = () => (new Date).getTime();
 
 export class ClockItem extends Component {
 
-  constructor(props) {
-    super(props)
-    // this.setState({status: props.status})
-    // this.start();
-  }
-
   componentWillMount() {
     this.start(this.props);
   }
@@ -53,8 +47,6 @@ export class ClockItem extends Component {
   }
 
   componentWillReceiveProps(props) {
-    // console.log('received props:', props);
-    // this.setState({status: props.status})
     if (props.status != this.props.status) {
       this.start(props);
     }
