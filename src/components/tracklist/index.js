@@ -4,6 +4,7 @@ import { connect } from 'preact-redux';
 import { homeTracks } from '../../store/selectors';
 import * as actions from '../../store/actions';
 import AddTrack from '../addtrack';
+import Intro from '../intro';
 import { TrackCounter } from '../ui/trackcounter.component';
 import { TrackRecord } from '../ui/trackrecord.component';
 import { Swipe } from '../ui/swipe.reactive';
@@ -64,6 +65,7 @@ export default class TrackList extends Component {
         </Swipe>
         ))}
       </div>
+      { tracks.length==0 && <Intro /> }
     </div>
     )
   }
