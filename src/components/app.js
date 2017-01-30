@@ -16,7 +16,6 @@ export default class App extends Component {
   };
 
   closeAdd = e => {
-    console.log('called?')
     this.setState({showAdd: false})
   }
 
