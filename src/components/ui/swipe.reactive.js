@@ -74,9 +74,16 @@ export class Swipe extends Component {
   }
 
   success(width) {
+
     this.front.style.left = `${width}px`;
+    this.setState({success: true});
+    this.forceUpdate();
+
     if(this.props.onSwipeRight) {
-      this.props.onSwipeRight();
+      setTimeout(() => {
+        this.props.onSwipeRight();
+        this.front.style = '';
+      }, 310);
     }
   }
 
@@ -84,11 +91,13 @@ export class Swipe extends Component {
     this.front.style = '';
   }
 
-  render(props, state) {
+
+  render(props, {success}) {
     let [Front, Back] = props.children
     Front.attributes.ref = (r) => this.front = r
+    let css = (success) ? ' remove' : '';
     return (
-      <div className={props.className}>
+      <div className={props.className + css}>
         {Front}
         {Back}
       </div>
