@@ -5,8 +5,8 @@ export const TRACK_START = 'TRACK_START';
 export const TRACK_STOP = 'TRACK_STOP';
 export const TRACK_COUNT = 'TRACK_COUNT';
 export const TRACK_DELETE = 'TRACK_DELETE';
-
 export const LOAD_STORE = 'LOAD_STORE';
+
 
 export const now = () => (new Date()).getTime();
 

@@ -14,7 +14,7 @@ export const initialState = {
   tracks: [],
   tracksEntities: {},
   logs: [],
-  logsEntities: {}
+  logsEntities: {},
 };
 
 
@@ -31,7 +31,7 @@ const defaultTrack = (counter) => ({
 const cl = (obj, props) => Object.assign({}, obj, props);
 
 
-export function reducerTracks(state, action) {
+export function reducerTracks(state = initialState, action) {
 
   switch (action.type) {
     case actions.LOAD_STORE: {
@@ -94,6 +94,11 @@ export function reducerTracks(state, action) {
     }
   }
   return state;
+}
+
+
+export function reducer(state = initialState, action) {
+  return reducerTracks(state, action);
 }
 
 
