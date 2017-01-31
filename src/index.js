@@ -6,15 +6,16 @@ import './style';
 import { Provider } from 'preact-redux';
 
 // Setup store
-import { createStore } from 'redux';
-import { reducerTracks, initialState } from './store';
+import { createStore, compose, combineReducers } from 'redux';
+import { reducer, initialState } from './store';
 import { loadState, saveState } from './store/localStorage';
 
 let istate = loadState();
 
+
 let store;
 store = createStore(
-  reducerTracks,
+  reducer,
   (istate) ? istate : initialState,
   window.devToolsExtension && window.devToolsExtension()
 );

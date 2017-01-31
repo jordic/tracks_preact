@@ -8,8 +8,39 @@ import AddTrack from './addtrack';
 import TrackList from './tracklist';
 import TrackDetails from './trackdetails';
 
+const win = window || undefined;
+
+// take current url
+
+
 export default class App extends Component {
 
+  constructor(props) {
+    super(props)
+    if(win) {
+      this.navigate(win);
+      win.addEventListener('popstate', () => {
+        this.navigate(win);
+      });
+    }
+  }
+
+  navigate(win) {
+    if(win.location.pathname.length >1) {
+      let id = win.location.pathname.replace("/tracks/", "");
+      if(id) {
+        this.trackDetails(id);
+        return;
+      }
+    }
+    this.gotoHome();
+  }
+
+  setUrl = (url, title='Tracks') => {
+    if(win && url != win.location.pathname){
+      history.pushState({}, title, url);
+    }
+  }
 
   showAdd = e => {
     this.setState({showAdd: true})
@@ -20,6 +51,7 @@ export default class App extends Component {
   }
 
   trackDetails = (id) => {
+    this.setUrl('/tracks/'+id);
     this.setState({
       showAdd: false,
       showTrack: true,
@@ -28,6 +60,7 @@ export default class App extends Component {
   }
 
   gotoHome = (ev) => {
+    this.setUrl('/');
     this.setState({
       showTrack: false,
       showAdd: false,
