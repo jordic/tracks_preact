@@ -1,6 +1,7 @@
 
 import * as actions from './actions';
 import {deleteKeys} from './utils';
+import {driveReducer, EXPORT_SHEET_OK} from './drive/reducers';
 
 let id = 1;
 
@@ -97,8 +98,30 @@ export function reducerTracks(state = initialState, action) {
 }
 
 
+function reducerTrackEntities(state, action) {
+  switch (action.type) {
+    case EXPORT_SHEET_OK: {
+      // let track = state.filter(t => t.id===action.payload.trackId)
+      let id = action.payload.trackId;
+      return Object.assign({}, state, {
+        [id]: Object.assign({}, state[id], {
+          sheetUrl: action.payload.url,
+          sheetExported: action.payload.exported
+        })
+      });
+    }
+  }
+  return state;
+}
+
+
+
+
 export function reducer(state = initialState, action) {
-  return reducerTracks(state, action);
+  const r = reducerTracks(state, action);
+  let drive = driveReducer(state.drive, action);
+  let tracksEntities = reducerTrackEntities(state.tracksEntities, action)
+  return Object.assign({}, r, {drive, tracksEntities});
 }
 
 

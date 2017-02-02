@@ -2,28 +2,26 @@
 // import 'isomorphic-fetch';
 import { h, render } from 'preact';
 import './style';
-
 import { Provider } from 'preact-redux';
 
-// Setup store
-import { createStore, compose, combineReducers } from 'redux';
-import { reducer, initialState } from './store';
-import { loadState, saveState } from './store/localStorage';
+import configureStore from './configureStore'
 
-let istate = loadState();
-
-
-let store;
-store = createStore(
-  reducer,
-  (istate) ? istate : initialState,
-  window.devToolsExtension && window.devToolsExtension()
-);
+import { loadGAPIClient } from './lib/drive/load_gapi';
+import { requestIdle } from './lib/utils';
+import { GAPI_LOGIN } from './store/drive/reducers';
+import conf from './conf';
 
 
-store.subscribe(() => {
-  saveState(store.getState());
-});
+let store = configureStore();
+
+// idle work after boot
+requestIdle(() => {
+  const drive = loadGAPIClient(conf.GJS_CLIENT);
+  drive.then(() => {
+    store.dispatch({type: GAPI_LOGIN});
+  });
+})
+
 
 // Bootstrap app
 let root;

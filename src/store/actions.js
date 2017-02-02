@@ -1,5 +1,7 @@
 
 
+import * as gdrive from './drive/reducers';
+
 export const TRACK_ADD = 'TRACK_ADD';
 export const TRACK_START = 'TRACK_START';
 export const TRACK_STOP = 'TRACK_STOP';
@@ -69,5 +71,11 @@ export const mapDispatchToProps = (dispatch) => ({
   },
   trackDelete(id) {
     dispatch(trackDelete(id));
+  },
+  loginGapi(inmediate) {
+    dispatch(gdrive.actionGapiLogin(inmediate));
+  },
+  exportSheet(track) {
+    dispatch(gdrive.actionExportSheet(track));
   }
 })
