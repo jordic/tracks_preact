@@ -1,8 +1,10 @@
 
+const STORE_KEY = 'tracks';
+
 
 export const loadState = () => {
   try {
-    const serialized = localStorage.getItem('state');
+    const serialized = localStorage.getItem(STORE_KEY);
     if(serialized === null) {
       return undefined;
     }
@@ -16,7 +18,7 @@ export const loadState = () => {
 export const saveState = (state) => {
   try {
     const serialized = JSON.stringify(state);
-    localStorage.setItem('state', serialized);
+    localStorage.setItem(STORE_KEY, serialized);
   } catch(e) {
     console.log('error saving state', e);
   }
