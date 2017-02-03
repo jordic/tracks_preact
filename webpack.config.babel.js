@@ -80,7 +80,7 @@ module.exports = {
 			},
 			{
 				test: /\.(svg|woff2?|ttf|eot|jpe?g|png|gif)(\?.*)?$/i,
-				loader: ENV==='production' ? 'file-loader?name=[path][name]_[hash:base64:5].[ext]' : 'url-loader'
+				loader: ENV==='production' ? 'file?name=[path][name]_[hash:base64:5].[ext]' : 'url'
 			}
 		]
 	},
@@ -107,7 +107,8 @@ module.exports = {
 		}),
 		new CopyWebpackPlugin([
 			{ from: './manifest.json', to: './' },
-			{ from: './favicon.ico', to: './' }
+			{ from: './favicon.ico', to: './' },
+      { from: path.resolve(__dirname, 'src/assets'), to: './assets'}
 		])
 	]).concat(ENV==='production' ? [
 		new V8LazyParseWebpackPlugin(),
