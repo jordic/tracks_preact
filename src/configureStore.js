@@ -23,7 +23,7 @@ export default function configureStore() {
     )
   )
 
-  console.log('store', store);
+  // console.log('store', store);
 
   store.subscribe(() => {
     saveState(store.getState());

@@ -26,7 +26,7 @@ export default class App extends Component {
   }
 
   navigate(win) {
-    if(win.location.pathname.length >1) {
+    if(win.location.pathname.indexOf('/tracks/') === 0) {
       let id = win.location.pathname.replace("/tracks/", "");
       if(id) {
         this.trackDetails(id);

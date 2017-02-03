@@ -26,6 +26,7 @@ requestIdle(() => {
 // Bootstrap app
 let root;
 function init() {
+  document.body.innerHTML = '';
   let App = require('./components/app').default;
   root = render(
     <Provider store={store}>

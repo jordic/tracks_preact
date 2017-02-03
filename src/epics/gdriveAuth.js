@@ -26,7 +26,7 @@ export default function gdriveAuth(action$) {
   return action$.ofType(GAPI_LOGIN)
     .switchMap(a =>{
       let when = a.payload ? false : true;
-      console.log('when', when);
+      // console.log('when', when);
       return Observable
         .fromPromise(checkAuth(conf.SCOPES, conf.GAPI_UID, when))
         .catch(e => {

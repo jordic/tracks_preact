@@ -122,7 +122,7 @@ export function reducer(state = initialState, action) {
   let drive = driveReducer(r.drive, action);
   let tracksEntities = reducerTrackEntities(r.tracksEntities, action)
   // console.log(state.tracksEntities);
-  return Object.assign({}, r, {drive});
+  return Object.assign({}, r, {drive, tracksEntities});
 }
 
 
