@@ -231,3 +231,11 @@ td,
 th {
   padding: 0;
 }
+
+// Remove outline from elements
+input:focus,
+select:focus,
+button:focus,
+textarea:focus {
+  outline: none;
+}

@@ -67,7 +67,7 @@ export class Swipe extends Component {
   }
 
   componentWillUnmount() {
-    this.front.style = '';
+    this.front.setAttribute('style', '');
     if (this.subs) {
       this.subs.unsubscribe();
     }
@@ -88,7 +88,7 @@ export class Swipe extends Component {
   }
 
   fail() {
-    this.front.style = '';
+    this.front.setAttribute('style', '');
   }
 
 

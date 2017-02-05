@@ -5,13 +5,10 @@ import { dRaf } from '../../lib/utils';
 
 export default class AddTrack extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
       kind: 'timer',
       acss: '',
       style: ''
-    }
   }
 
   setType(e) {
@@ -76,7 +73,7 @@ export default class AddTrack extends Component {
 
       <input name="desc" type="text"
         ref={(input) => this.Input = input }
-        onKeyPress={this.onKeyPress}
+        onkeyup={this.onKeyPress}
         placeholder="Add your track title" />
 
       <div className="kind">
