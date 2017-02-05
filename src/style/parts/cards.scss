@@ -67,6 +67,12 @@
     transform: scale(1, 0);
   }
 
+  @media ($tablet) {
+    width: 45%;
+    float: left;
+    margin: 2%;
+  }
+
 }
 
 .card_main {

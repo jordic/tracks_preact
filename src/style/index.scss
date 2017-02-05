@@ -9,6 +9,11 @@ $initial: #1695a3;
 $initial10: #acf0f2;
 $white: #fff;
 
+// mixins
+
+$tablet: "min-device-width: 768px";
+
+
 html {
   width: 100%;
   height: 100%;
