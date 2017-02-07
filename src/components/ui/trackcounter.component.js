@@ -1,14 +1,18 @@
 import { h, Component } from 'preact';
+import conf from '../../conf';
 
 
-export const TrackCounter = ({track, click}) => {
+export const TrackCounter = ({track, click, remove}) => {
 
   return (
   <app-track-counter>
     <span className="card_icon">
       <img src="assets/counter.svg" />
     </span>
-    <h3 className="card_title">{ track.desc }</h3>
+    <h3 className="card_title">
+      { track.desc }
+      {!conf.IsTouch && <button onclick={remove} className="btn-small">DELETE</button>}
+    </h3>
     <span className="amount">{ track.amount }</span>
 
     <div class="record">

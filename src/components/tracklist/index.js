@@ -36,6 +36,7 @@ export default class TrackList extends Component {
 
   delete = (id) => (ev) => {
     this.props.trackDelete(id);
+    ev.stopPropagation();
   }
 
   trackClick = (id) => (ev) => {
@@ -52,9 +53,11 @@ export default class TrackList extends Component {
         <Swipe className="card_ct" onSwipeRight={this.delete(track.id)} key={track.id}>
           <div class="card_main" onclick={ this.trackClick(track.id) }>
             { track.kind == 'counter' &&
-              <TrackCounter track={track} click={this.trackCount(track.id)} /> }
+              <TrackCounter track={track} remove={this.delete(track.id)}
+                click={this.trackCount(track.id)} /> }
             { track.kind == 'timer' &&
-              <TrackRecord track={track} start={this.trackStart(track.id)}
+              <TrackRecord track={track} remove={this.delete(track.id)}
+                start={this.trackStart(track.id)}
                 stop={this.trackStop(track.id)} />
             }
           </div>

@@ -1,14 +1,18 @@
 import { h, Component } from 'preact';
 
 import { ClockItem } from './tracktime.component';
+import conf from '../../conf';
 
-export const TrackRecord = ({track, start, stop}) => {
+export const TrackRecord = ({track, start, stop, remove}) => {
   return (
    <app-track-time>
     <span className="card_icon">
       <img src="assets/timer.svg" />
     </span>
-    <h3 className="card_title">{ track.desc }</h3>
+    <h3 className="card_title">
+      { track.desc }
+      {!conf.IsTouch && <button onclick={remove} className="btn-small">DELETE</button>}
+    </h3>
     <app-track-clock class="amount">
       <ClockItem time={track.amount}
         last={track.lastRecord} status={track.state} />
