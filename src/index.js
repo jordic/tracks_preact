@@ -15,12 +15,13 @@ import conf from './conf';
 let store = configureStore();
 
 // idle work after boot
-requestIdle(() => {
+// try to swap it for a delayed execution
+setTimeout(() => requestIdle(() => {
   const drive = loadGAPIClient(conf.GJS_CLIENT);
   drive.then(() => {
     store.dispatch({type: GAPI_LOGIN});
   });
-})
+}), 5000);
 
 
 // Bootstrap app
