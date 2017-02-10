@@ -113,3 +113,22 @@
 }
 
 
+.stats__row {
+  padding: 5px 0 5px 0;
+  border-bottom: 1px solid $background;
+}
+
+.stats__row--right {
+  display: block;
+  float:right;
+  text-align:right;
+}
+
+.stats__row--header {
+  display: block;
+  color: $black;
+  text-align: right;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  font-size: 1.4em;
+}

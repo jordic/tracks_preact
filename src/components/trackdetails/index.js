@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { connect } from 'react-redux';
-import { dataForTrack } from '../../store/selectors';
+import { dataForTrack, calcDay } from '../../store/selectors';
 import * as actions from '../../store/actions';
 
 import { TrackCounter } from '../ui/trackcounter.component';
@@ -36,6 +36,7 @@ export default class TrackDetails extends Component {
   }
 
   render({track, style, drive, loginGapi, exportSheet}, state) {
+    let CurrDate = groupByFactory();
     return (
       <div className="wrap fb" style={style}>
         <div class="card interior">
@@ -89,9 +90,61 @@ export default class TrackDetails extends Component {
 
           </div>
         }
+        {track.logs.length > 0 && <div class="stats card table">
+        {track.logs.reverse()
+          .filter(log => (log.action === 'stop' || log.action === 'track'))
+          .map(l => (
+            <div class="stats__row">
+              { <CurrDate time={ calcDay(l.time) } /> }
+              <Hour time={l.time} />
+              { l.action === 'stop' &&
+                <span class="stats__row--right">{timePipe(l.amount)}</span>
+              }
+              { l.action === 'track' &&
+                <span class="stats__row--right">{l.amount}</span>
+              }
+            </div>
+          ))
+        }
+        </div>
+        }
 
       </div>
     )
   }
 
+}
+
+const pad = str => (str < 10) ? '0' + str : str;
+
+
+export function Hour({time}) {
+  let ho = new Date(time);
+  return (
+    <span>
+      {pad(ho.getHours())}:{pad(ho.getMinutes())}:{pad(ho.getSeconds())}
+    </span>
+  )
+}
+
+
+const month = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'
+]
+
+
+function groupByFactory() {
+  let current;
+  return ({time}) => {
+    let out = null;
+    let t = new Date(time);
+    if(current != time) {
+      out = (<span class="stats__row--header">
+        {month[t.getMonth()]} { t.getDate() }
+      </span>
+      );
+      current = time;
+    }
+    return out
+  };
 }

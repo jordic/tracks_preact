@@ -24,6 +24,11 @@ setTimeout(() => requestIdle(() => {
 }), 5000);
 
 
+// import generateData from './store/fixtures';
+
+// generateData('1486664115333-1002', store);
+
+
 // Bootstrap app
 let root;
 function init() {
