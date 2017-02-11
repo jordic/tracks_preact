@@ -24,6 +24,7 @@ export default function configureStore() {
   )
 
   // console.log('store', store);
+  window.store = store;
 
   store.subscribe(() => {
     saveState(store.getState());

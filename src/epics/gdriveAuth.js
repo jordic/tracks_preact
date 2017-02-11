@@ -21,6 +21,12 @@ export function checkAuth(scopes, clientId, inmediate) {
   }).then();
 }
 
+export function loadDriveClient(result) {
+  return Observable.fromPromise(
+    gapi.client.load('drive', 'v3')
+  ).map(a => result);
+}
+
 
 export default function gdriveAuth(action$) {
   return action$.ofType(GAPI_LOGIN)
@@ -32,7 +38,10 @@ export default function gdriveAuth(action$) {
         .catch(e => {
           return Observable.of({error: true});
         })
-    }).map(result => {
+    })
+    .switchMap(result =>
+        (result && !result.error) ? loadDriveClient(result) : Observable.of(result))
+    .map(result => {
       if (result && !result.error) {
         return actionAuthResult('success')
       }

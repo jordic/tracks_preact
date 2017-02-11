@@ -11,6 +11,8 @@ import { requestIdle } from './lib/utils';
 import { GAPI_LOGIN } from './store/drive/reducers';
 import conf from './conf';
 
+import * as sync from './epics/driveSync';
+
 
 let store = configureStore();
 
