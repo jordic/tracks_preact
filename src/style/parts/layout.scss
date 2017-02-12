@@ -69,7 +69,7 @@ app-fab {
   width: 100%;
   height: calc(100% - 70px);
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   // margin-top: -40px;
   perspective: 1500px;
   margin-bottom: 0px;
