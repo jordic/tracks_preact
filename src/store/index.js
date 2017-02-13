@@ -1,12 +1,11 @@
-
-import * as actions from './actions';
-import {deleteKeys} from './utils';
-import {driveReducer, EXPORT_SHEET_OK} from './drive/reducers';
+import * as actions from "./actions";
+import { deleteKeys } from "./utils";
+import { driveReducer, EXPORT_SHEET_OK } from "./drive/reducers";
 
 let id = 1;
 
 function getId() {
-  return (new Date()).getTime() + '-' + ++id;
+  return new Date().getTime() + "-" + ++id;
 }
 
 // Tech Dept: That comes from angular. Need tests.
@@ -22,34 +21,34 @@ export const initialState = {
   tracks: [],
   tracksEntities: {},
   logs: [],
-  logsEntities: {},
+  logsEntities: {}
 };
 
-
-const defaultTrack = (counter) => ({
+const defaultTrack = counter => ({
   id: getId(),
-  kind: 'time',
-  desc: 'Track ' + counter,
-  state: 'stopped',
+  kind: "time",
+  desc: "Track " + counter,
+  state: "stopped",
   amount: 0,
-  lastRecord: 0,
+  lastRecord: 0
 });
-
 
 const cl = (obj, props) => Object.assign({}, obj, props);
 
-
 export function reducerTracks(state = initialState, action) {
-
   switch (action.type) {
     case actions.LOAD_STORE: {
       return loadStore();
     }
     case actions.TRACK_ADD: {
-      let track = cl(
-        defaultTrack(state.counter), action.payload.kind
+      let track = cl(defaultTrack(state.counter), action.payload.kind);
+      let addLog = logTrack(
+        action.payload.time,
+        track.id,
+        "track_add",
+        0,
+        action.payload.logId
       );
-      let addLog = logTrack(action.payload.time, track.id, 'track_add', 0);
       return cl(state, {
         tracks: [...state.tracks, track.id],
         tracksEntities: cl(state.tracksEntities, {
@@ -68,8 +67,8 @@ export function reducerTracks(state = initialState, action) {
       let track = state.tracksEntities[action.payload.id];
       return newState(
         state,
-        cl(track, { lastRecord, state: 'recording' }),
-        logTrack(lastRecord, track.id, 'recording')
+        cl(track, { lastRecord, state: "recording" }),
+        logTrack(lastRecord, track.id, "recording", 0, action.payload.logId)
       );
     }
 
@@ -79,8 +78,14 @@ export function reducerTracks(state = initialState, action) {
       let amount = track.amount + (lastRecord - track.lastRecord);
       return newState(
         state,
-        cl(track, { state: 'stopped', amount, lastRecord }),
-        logTrack(lastRecord, track.id, 'stop', (lastRecord - track.lastRecord))
+        cl(track, { state: "stopped", amount, lastRecord }),
+        logTrack(
+          lastRecord,
+          track.id,
+          "stop",
+          lastRecord - track.lastRecord,
+          action.payload.logId
+        )
       );
     }
 
@@ -91,17 +96,26 @@ export function reducerTracks(state = initialState, action) {
       return newState(
         state,
         cl(track, { lastRecord, amount }),
-        logTrack(lastRecord, track.id, 'track', 1)
+        logTrack(lastRecord, track.id, "track", 1, action.payload.logId)
       );
     }
 
     case actions.TRACK_DELETE: {
       let logIds = logsForTrack(state.logsEntities, action.payload.id);
-      let delLog = logTrack(action.payload.time, action.payload.id, 'track_del', 0);
+      let delLog = logTrack(
+        action.payload.time,
+        action.payload.id,
+        "track_del",
+        0,
+        action.payload.logId
+      );
       // console.log('ids', logIds);
       let rstate = cl(state, {
         tracks: state.tracks.filter(i => i !== action.payload.id),
-        tracksEntities: deleteKeys(state.tracksEntities, [].concat(action.payload.id)),
+        tracksEntities: deleteKeys(
+          state.tracksEntities,
+          [].concat(action.payload.id)
+        ),
         logs: state.logs.filter(i => logIds.indexOf(i) === -1),
         logsEntities: deleteKeys(state.logsEntities, logIds)
       });
@@ -110,14 +124,12 @@ export function reducerTracks(state = initialState, action) {
         logs: [...rstate.logs, delLog.id],
         logsEntities: cl(rstate.logsEntities, {
           [delLog.id]: delLog
-        }),
-      })
-
+        })
+      });
     }
   }
   return state;
 }
-
 
 function reducerTrackEntities(state, action) {
   switch (action.type) {
@@ -135,17 +147,13 @@ function reducerTrackEntities(state, action) {
   return state;
 }
 
-
-
-
 export function reducer(state = initialState, action) {
   const r = reducerTracks(state, action);
   let drive = driveReducer(r.drive, action);
-  let tracksEntities = reducerTrackEntities(r.tracksEntities, action)
+  let tracksEntities = reducerTrackEntities(r.tracksEntities, action);
   // console.log(state.tracksEntities);
-  return Object.assign({}, r, {drive, tracksEntities});
+  return Object.assign({}, r, { drive, tracksEntities });
 }
-
 
 export function logsForTrack(entities, trackId) {
   return Object.keys(entities)
@@ -154,17 +162,15 @@ export function logsForTrack(entities, trackId) {
     .map(el => el.id);
 }
 
-
-function logTrack(time, trackId, action, amount = 0) {
+function logTrack(time, trackId, action, amount = 0, id = getId()) {
   return {
-    id: getId(),
+    id,
     action,
     trackId,
     time,
     amount
   };
 }
-
 
 // Computes a new state
 function newState(state, track, log) {
@@ -175,6 +181,6 @@ function newState(state, track, log) {
     logs: [...state.logs, log.id],
     logsEntities: Object.assign({}, state.logsEntities, {
       [log.id]: log
-    }),
+    })
   });
 }

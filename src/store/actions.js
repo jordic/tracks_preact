@@ -8,7 +8,8 @@ export const TRACK_STOP = 'TRACK_STOP';
 export const TRACK_COUNT = 'TRACK_COUNT';
 export const TRACK_DELETE = 'TRACK_DELETE';
 export const LOAD_STORE = 'LOAD_STORE';
-
+export const SYNC_STORE = 'SYNC_STORE';
+export const SYNC_STORE_OK = 'SYNC_STORE_OK';
 
 export const now = () => (new Date()).getTime();
 
@@ -22,44 +23,57 @@ export function addTrack(p, time = now()) {
   };
 }
 
-export function trackStart(id, time = now()) {
+export function syncStore(time = now()) {
+  return {
+    type: SYNC_STORE,
+    payload: {
+      time: time
+    }
+  }
+}
+
+export function trackStart(id, time = now(), logId=undefined) {
   return {
     type: TRACK_START,
     payload: {
       id: id,
-      time: time
+      time: time,
+      logId
     }
   };
 }
 
-export function trackStop(id, time = now()) {
+export function trackStop(id, time = now(), logId=undefined) {
   return {
     type: TRACK_STOP,
     payload: {
       id: id,
-      time: time
+      time: time,
+      logId
     }
   };
 }
 
 
-export function trackCount(id, time = now()) {
+export function trackCount(id, time = now(), logId=undefined) {
   return {
     type: TRACK_COUNT,
     payload: {
       id: id,
-      time: time
+      time: time,
+      logId
     }
   };
 }
 
 
-export function trackDelete(id, time = now()) {
+export function trackDelete(id, time = now(), logId=undefined) {
   return {
     type: TRACK_DELETE,
     payload: {
       id: id,
-      time: time
+      time: time,
+      logId
     }
   };
 }
@@ -83,5 +97,9 @@ export const mapDispatchToProps = (dispatch) => ({
   },
   exportSheet(track) {
     dispatch(gdrive.actionExportSheet(track));
+  },
+  syncStore() {
+    dispatch(syncStore())
   }
+
 })
