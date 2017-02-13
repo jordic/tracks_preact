@@ -1,5 +1,5 @@
 
-
+import { SYNC_STORE, SYNC_STORE_OK } from '../actions';
 
 export const GAPI_LOGIN = 'GAPI_LOGIN';
 export const GAPI_RESULT = 'GAPI_RESULT';
@@ -39,10 +39,11 @@ export function actionGapiLogin(inmediate=false) {
 // exportStatus = 'working' | 'fail' | 'success'
 const initial = {
   authState: 'pending',
-  logging: false,
+  logging: true,
   exporting: false,
   trackId: '',
-  exportStatus: ''
+  exportStatus: '',
+  syncing: false
 };
 
 
@@ -76,6 +77,20 @@ export function driveReducer(state = initial, action) {
         exportStatus: 'success'
       });
     }
+
+    case SYNC_STORE: {
+      return Object.assign({}, state, {
+        syncing: true
+      });
+    }
+
+    case SYNC_STORE_OK: {
+      return Object.assign({}, state, {
+        syncing: false
+      });
+    }
+
+
 
   }
   return state;

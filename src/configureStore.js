@@ -27,7 +27,10 @@ export default function configureStore() {
   window.store = store;
 
   store.subscribe(() => {
-    saveState(store.getState());
+    let {tracks, tracksEntities, logs, logsEntities} = store.getState()
+    saveState({
+      tracks, tracksEntities, logs, logsEntities
+    });
   });
   return store;
 }

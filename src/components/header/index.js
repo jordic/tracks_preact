@@ -3,19 +3,18 @@ import { h, Component } from 'preact';
 import { connect } from 'preact-redux';
 import { mapDispatchToProps } from '../../store/actions'
 
+import Sync from '../ui/Sync';
+
+
 const stateToProps = (state) =>
   ({
     drive: state.drive
   })
 
-
-
 @connect(stateToProps, mapDispatchToProps)
 export default class Header extends Component {
 
   render(props) {
-
-    console.log(props)
 
     let back = ""
     if(props.header) {
@@ -25,14 +24,18 @@ export default class Header extends Component {
         </div>
       )
     }
+    let cl = '';
+    if(props.drive.syncing) {
+      cl = 'header__reload_anim';
+    }
 
     return (
       <header>
         <h1>Tracks</h1>
         {back}
         {props.drive.authState === 'success' &&
-          <button className="reload" onclick={props.syncStore}>
-            sync
+          <button className="header__reload" onclick={props.syncStore}>
+              <Sync className={cl} />
           </button>
         }
       </header>
