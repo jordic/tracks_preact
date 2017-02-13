@@ -24,7 +24,6 @@ const create = function () {
       resource: { name: FILE, parents: ['appDataFolder'] }
     })
     .then(response => {
-      console.log('create', response);
       return delve(response, 'result.id', null);
     });
 };
@@ -35,10 +34,8 @@ const prepare = function() {
     .list({
       q: `name="${FILE}"`,
       spaces: 'appDataFolder',
-      fields: 'files(id)'
+      fields: 'files(id,modifiedTime)'
     }).then(resp => {
-      console.log('prepare', resp);
-      console.log(delve(resp, 'result.files.0.id', undefined))
       return delve(resp, 'result.files.0.id') || create();
     })
 }
@@ -48,7 +45,6 @@ export const load = () => {
     return gapi.client.drive.files
       .get({fileId: id, alt: 'media'})
       .then(resp => {
-        console.log(resp);
         return delve(resp, 'result')
       })
   });
