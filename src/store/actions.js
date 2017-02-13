@@ -12,10 +12,13 @@ export const LOAD_STORE = 'LOAD_STORE';
 
 export const now = () => (new Date()).getTime();
 
-export function addTrack(p) {
+export function addTrack(p, time = now()) {
   return {
     type: TRACK_ADD,
-    payload: p
+    payload: {
+      kind: p,
+      time: time
+    }
   };
 }
 
@@ -51,10 +54,13 @@ export function trackCount(id, time = now()) {
 }
 
 
-export function trackDelete(id) {
+export function trackDelete(id, time = now()) {
   return {
     type: TRACK_DELETE,
-    payload: id
+    payload: {
+      id: id,
+      time: time
+    }
   };
 }
 

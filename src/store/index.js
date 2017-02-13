@@ -9,6 +9,13 @@ function getId() {
   return (new Date()).getTime() + '-' + ++id;
 }
 
+// Tech Dept: That comes from angular. Need tests.
+// Soon or later we need to change the shape of this state,
+// to something like:
+// tracks: { byId: {}, all: [] }
+// logs: { byId: {}, all: [] }
+// this way we can simplify a lot the reducers. (doing only things)
+// related to their state and not working on all the shape at the same time
 
 export const initialState = {
   counter: 1,
@@ -40,12 +47,17 @@ export function reducerTracks(state = initialState, action) {
     }
     case actions.TRACK_ADD: {
       let track = cl(
-        defaultTrack(state.counter), action.payload
+        defaultTrack(state.counter), action.payload.kind
       );
+      let addLog = logTrack(action.payload.time, track.id, 'track_add', 0);
       return cl(state, {
         tracks: [...state.tracks, track.id],
         tracksEntities: cl(state.tracksEntities, {
           [track.id]: track
+        }),
+        logs: [...state.logs, addLog.id],
+        logsEntities: cl(state.logsEntities, {
+          [addLog.id]: addLog
         }),
         counter: state.counter++
       });
@@ -84,14 +96,23 @@ export function reducerTracks(state = initialState, action) {
     }
 
     case actions.TRACK_DELETE: {
-      let logIds = logsForTrack(state.logsEntities, action.payload);
+      let logIds = logsForTrack(state.logsEntities, action.payload.id);
+      let delLog = logTrack(action.payload.time, action.payload.id, 'track_del', 0);
       // console.log('ids', logIds);
-      return cl(state, {
-        tracks: state.tracks.filter(i => i !== action.payload),
-        tracksEntities: deleteKeys(state.tracksEntities, [].concat(action.payload)),
+      let rstate = cl(state, {
+        tracks: state.tracks.filter(i => i !== action.payload.id),
+        tracksEntities: deleteKeys(state.tracksEntities, [].concat(action.payload.id)),
         logs: state.logs.filter(i => logIds.indexOf(i) === -1),
         logsEntities: deleteKeys(state.logsEntities, logIds)
       });
+
+      return Object.assign({}, rstate, {
+        logs: [...rstate.logs, delLog.id],
+        logsEntities: cl(rstate.logsEntities, {
+          [delLog.id]: delLog
+        }),
+      })
+
     }
   }
   return state;
