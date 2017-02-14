@@ -1,6 +1,7 @@
 import * as actions from "./actions";
 import { deleteKeys } from "./utils";
 import { driveReducer, EXPORT_SHEET_OK } from "./drive/reducers";
+import { reducerSyncState} from './sync'
 
 let id = 1;
 
@@ -41,16 +42,13 @@ export function reducerTracks(state = initialState, action) {
       return loadStore();
     }
     case actions.TRACK_ADD: {
-      let {logId} = action.payload;
-      console.log('log id', action.payload)
       // delete action.payload.logId
       let track = cl(defaultTrack(state.counter), action.payload.kind);
       let addLog = logTrack(
         action.payload.time,
         track.id,
         "track_add",
-        0,
-        logId
+        0
       );
       return cl(state, {
         tracks: [...state.tracks, track.id],
@@ -151,7 +149,8 @@ function reducerTrackEntities(state, action) {
 }
 
 export function reducer(state = initialState, action) {
-  const r = reducerTracks(state, action);
+  let r = reducerTracks(state, action);
+  r = reducerSyncState(r, action);
   let drive = driveReducer(r.drive, action);
   let tracksEntities = reducerTrackEntities(r.tracksEntities, action);
   // console.log(state.tracksEntities);

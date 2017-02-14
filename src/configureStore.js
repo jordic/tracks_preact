@@ -9,9 +9,11 @@ import rootEpic from './epics';
 
 let istate = loadState();
 // migrate state?
-if(!istate.version) {
+if(istate && !istate.version) {
   // add to log action create track
   // Object.keys(istate.logsEntities).()
+  // istate.tracks = []
+  // istate.tracksEntities = []
   // istate.logs = []
   // istate.logsEntities = {}
 }
