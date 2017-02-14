@@ -12,7 +12,7 @@ module.exports = function(config) {
 	config.set({
 		basePath: '../',
 		frameworks: ['mocha', 'chai-sinon'],
-		reporters: ['mocha', 'coverage'],
+		reporters: ['mocha'],
 		coverageReporter: {
 			reporters: [
 				{
@@ -26,7 +26,7 @@ module.exports = function(config) {
 			]
 		},
 
-		browsers: ['PhantomJS'],
+		browsers: ['Chrome'],
 
 		files: [
 			'test/browser/**/*.js'
