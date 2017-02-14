@@ -13,15 +13,18 @@ export const SYNC_STORE_OK = 'SYNC_STORE_OK';
 
 export const now = () => (new Date()).getTime();
 
-export function addTrack(p, time = now()) {
+export function addTrack(p, time = now(), logId=undefined) {
+  console.log("track add", p, time, logId)
   return {
     type: TRACK_ADD,
     payload: {
       kind: p,
-      time: time
+      time: time,
+      logId: logId
     }
   };
 }
+
 
 export function syncStore(time = now()) {
   return {

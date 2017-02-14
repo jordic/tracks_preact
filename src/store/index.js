@@ -41,13 +41,16 @@ export function reducerTracks(state = initialState, action) {
       return loadStore();
     }
     case actions.TRACK_ADD: {
+      let {logId} = action.payload;
+      console.log('log id', action.payload)
+      // delete action.payload.logId
       let track = cl(defaultTrack(state.counter), action.payload.kind);
       let addLog = logTrack(
         action.payload.time,
         track.id,
         "track_add",
         0,
-        action.payload.logId
+        logId
       );
       return cl(state, {
         tracks: [...state.tracks, track.id],

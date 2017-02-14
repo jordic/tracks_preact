@@ -17,23 +17,30 @@ import * as action from '../store/actions';
 
 const FILE = 'tracks.json';
 
+const getDeleted = (state) => {
+  return Object.keys(state.logsEntities)
+    .filter(d => state.logsEntities[d].action === 'track_del')
+    .map(d => state.logsEntities[d].trackId)
+}
+
+
 const replayState = (state) => (rstate) => {
   let actions = [];
-  // console.log(rstate, state);
-  rstate.logs.map(lo => {
-    if(state.logs.indexOf(lo) === -1) {
+  let deleted = getDeleted(state)
+
+  rstate.logs && rstate.logs.map(lo => {
+    if(state.logs.indexOf(lo) === -1
+    && deleted.indexOf(rstate.logsEntities[lo].trackId) === -1) {
       let log = rstate.logsEntities[lo];
       // console.log("sync", log);
       switch(log.action) {
         case "track_add":
-          // if(rstate.tracksEntities[lo]) {
-            let kind = rstate.tracksEntities[log.trackId].kind
-            actions.push(action.addTrack({
-              kind: rstate.tracksEntities[log.trackId].kind,
-              desc: rstate.tracksEntities[log.trackId].desc,
-              id: log.trackId
-            }, log.time, log.id));
-          // }
+          let kind = rstate.tracksEntities[log.trackId].kind
+          actions.push(action.addTrack({
+            kind: rstate.tracksEntities[log.trackId].kind,
+            desc: rstate.tracksEntities[log.trackId].desc,
+            id: log.trackId
+          }, log.time, lo));
           break;
         case "recording":
           actions.push(action.trackStart(log.trackId, log.time));
@@ -45,12 +52,14 @@ const replayState = (state) => (rstate) => {
           actions.push(action.trackCount(log.trackId, log.time))
           break;
         case "track_del":
-          actions.push(action.trackDelete(log.trackId, log.time));
+          if( state.tracks.indexOf(log.trackId) !== -1 ) {
+            actions.push(action.trackDelete(log.trackId, log.time));
+          }
           break;
       }
     }
   })
-  // console.log('actions', actions);
+  console.log('actions', actions);
   actions.push({type: action.SYNC_STORE_OK});
   return actions;
     // Observable.of({type: action.SYNC_STORE_OK}))

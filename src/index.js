@@ -23,7 +23,7 @@ setTimeout(() => requestIdle(() => {
   drive.then(() => {
     store.dispatch({type: GAPI_LOGIN});
   });
-}), 5000);
+}), 500);
 
 
 // import generateData from './store/fixtures';

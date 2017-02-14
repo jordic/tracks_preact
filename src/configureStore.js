@@ -8,6 +8,13 @@ import rootEpic from './epics';
 
 
 let istate = loadState();
+// migrate state?
+if(!istate.version) {
+  // add to log action create track
+  // Object.keys(istate.logsEntities).()
+  // istate.logs = []
+  // istate.logsEntities = {}
+}
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
