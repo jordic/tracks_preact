@@ -54,9 +54,9 @@ describe('migratesotrev1', ()=>{
           trackId: '1487093831450-5',
           time: 1487093831450,
           amount: 0
-        },
+        }
       }
-    }
+    };
   });
 
 
@@ -67,22 +67,22 @@ describe('migratesotrev1', ()=>{
       let result = withoutAction(state);
       expect(result).to.eql(['1487093902979-9']);
 
-    })
-  })
+    });
+  });
 
   it('should add a log of tracks creation, to allow replication', () => {
 
-      let result = migrateStore(state);
-      expect(Object.keys(result.logsEntities).length).to.eq(3);
-      let res = Object.keys(result.logsEntities)
-        .map(a => result.logsEntities[a])
-        .filter(a => a.action === 'track_add')
-        .map(a => a.trackId);
-      expect(res.includes('1487093902979-9')).to.eq(true);
-      expect(res.includes('1487093831450-5')).to.eq(true);
-      expect(res.length).to.eq(2);
-      expect(result.logs.length).to.eq(3);
+    let result = migrateStore(state);
+    expect(Object.keys(result.logsEntities).length).to.eq(3);
+    let res = Object.keys(result.logsEntities)
+      .map(a => result.logsEntities[a])
+      .filter(a => a.action === 'track_add')
+      .map(a => a.trackId);
+    expect(res.includes('1487093902979-9')).to.eq(true);
+    expect(res.includes('1487093831450-5')).to.eq(true);
+    expect(res.length).to.eq(2);
+    expect(result.logs.length).to.eq(3);
 
-  })
+  });
 
 });

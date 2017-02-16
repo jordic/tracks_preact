@@ -3,7 +3,8 @@
  * migratesStore, adding new log actions, to track
  * track creations.
  *
- * With this property, tracks can be syncronized
+ * With this property, tracks can be replicated across
+ * connected diveces on google drive
  */
 
 export function migrateStore(state) {
@@ -14,20 +15,20 @@ export function migrateStore(state) {
   let time = firstTime(state) - 30000;
 
   let logs = [],
-      entities = {};
+    entities = {};
 
   without.map(a => {
-    let act = action(a, time, i++)
+    let act = action(a, time, i++);
     logs.push(act);
     entities = {
       [act.id]: act
-    }
+    };
   });
 
   return Object.assign({}, state, {
     logs: [...logs, ...state.logs],
     logsEntities: Object.assign({}, state.logsEntities, entities)
-  })
+  });
 }
 
 
@@ -38,13 +39,13 @@ export function withoutAction(state) {
     .filter(l => l.action === 'track_add')
     .map(l => l.trackId);
 
-  return tracks.filter(a => !already.includes(a))
+  return tracks.filter(a => !already.includes(a));
 }
 
 
 const firstTime = (state) => {
   return state.logsEntities[state.logs[0]].time;
-}
+};
 
 
 const action = (trackId, time, i) => ({
@@ -53,4 +54,4 @@ const action = (trackId, time, i) => ({
   trackId,
   time,
   amount: 0
-})
+});
