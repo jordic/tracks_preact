@@ -12,10 +12,10 @@ export function timePipe(v) {
   if (!v) {
     return '00:00:00';
   }
-	let seconds = leadZero('' + (Math.floor(v / 1000) % 60));
-	let minutes = leadZero('' + Math.floor(((v / (60000)) % 60)) );
-	let hours = leadZero('' + Math.floor((v / (3600000))));
-	return `${hours}:${minutes}:${seconds}`;
+  let seconds = leadZero('' + (Math.floor(v / 1000) % 60));
+  let minutes = leadZero('' + Math.floor(((v / (60000)) % 60)) );
+  let hours = leadZero('' + Math.floor((v / (3600000))));
+  return `${hours}:${minutes}:${seconds}`;
 }
 
 
@@ -29,7 +29,7 @@ export class ClockItem extends Component {
 
   start(props) {
     if (props.status === 'stopped') {
-      let current = props.time
+      let current = props.time;
       this.setState({current});
       if (this.subs) {
         this.subs.unsubscribe();
@@ -40,10 +40,10 @@ export class ClockItem extends Component {
       .timer(0, 1000)
       .startWith(1)
       .map(m => (props.time + (current()) - props.last))
-      .subscribe(current =>{
+      .subscribe(current => {
         this.setState({current});
         this.forceUpdate();
-    });
+      });
   }
 
   componentWillReceiveProps(props) {
@@ -61,7 +61,7 @@ export class ClockItem extends Component {
   render(props, state) {
     return (
         <span>{timePipe(state.current)}</span>
-    )
+    );
   }
 
 
