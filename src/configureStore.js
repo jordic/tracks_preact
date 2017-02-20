@@ -18,19 +18,13 @@ function cleanStore(istate) {
 }
 
 let istate = loadState();
-// migrate state?
 // console.log(istate);
 // istate = cleanStore(istate);
 if (istate && !istate.version) {
-  // add to log action create track
-  // Object.keys(istate.logsEntities).()
-  // istate = cleanStore(istate);
   istate = migrateStore(istate);
-  // console.log("Result", istate);
 }
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
-
 
 export default function configureStore() {
 

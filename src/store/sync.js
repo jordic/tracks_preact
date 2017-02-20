@@ -2,6 +2,7 @@ import { SYNC_STORE_OK } from "./actions";
 
 export function reducerSyncState(state, action) {
   switch (action.type) {
+
     case SYNC_STORE_OK: {
       let result = {};
       let { rstate, state } = action.payload;
@@ -9,7 +10,7 @@ export function reducerSyncState(state, action) {
       let changed = diffLogs(state.logs, rstate.logs);
       let newLogs = getLogs(rstate.logsEntities, changed);
 
-      console.log("state", action.payload, changed, newLogs);
+      // console.log("state", action.payload, changed, newLogs);
       let { toDelete, toAdd } = getActions(changed, newLogs);
       let localDelete = getLocalDeletes(state.logsEntities);
 
@@ -32,7 +33,7 @@ export function reducerSyncState(state, action) {
 
       Object.keys(tracksEntities).map(a =>
         tracksEntities[a].amount = recalc(logsEntities, tracksEntities[a])
-      )
+      );
 
       result = Object.assign({}, state, {
         tracks,
