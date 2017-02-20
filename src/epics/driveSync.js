@@ -1,11 +1,11 @@
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/observable/concat';
-import 'rxjs/add/observable/from';
+// import 'rxjs/add/observable/concat';
+// import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/switch';
-import 'rxjs/add/operator/merge';
+// import 'rxjs/add/operator/switch';
+// import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/do';
 
 import 'rxjs/add/observable/never';

@@ -1,9 +1,9 @@
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/mergeMap';
+// import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/delay';
+// import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/of';
@@ -21,7 +21,7 @@ export default function exportSheet(action$) {
       return Observable
         .fromPromise(requestCreateSheet(track))
         .map(a => a.result)
-        .mergeMap(result =>
+        .switchMap(result =>
           Observable
             .fromPromise(requestAddDataToSheet(result, track))
             .map(res => ({
@@ -79,7 +79,7 @@ function trackValues(track) {
 
 function formatDate(d) {
   let m = new Date(d);
-  return `${m.getMonth()+1}/${m.getDate()}/${m.getFullYear()} ${m.getHours()}:${m.getMinutes()}:${m.getSeconds()}`
+  return `${m.getMonth()+1}/${m.getDate()}/${m.getFullYear()} ${m.getHours()}:${m.getMinutes()}:${m.getSeconds()}`;
 }
 
 
@@ -95,22 +95,22 @@ function addDataSheetRequest(track) {
 function createSheet(track) {
   let p = new Date();
   return {
-     properties: {
-        title: `Tracks ${track.desc} - ${p.toLocaleDateString()}`,
-        locale: 'en'
-      },
-      sheets: [
-        {
-          properties: {
-            title: 'Logs',
-            gridProperties: {
-              columnCount: 4,
-              frozenRowCount: 1
-            }
+    properties: {
+      title: `Tracks ${track.desc} - ${p.toLocaleDateString()}`,
+      locale: 'en'
+    },
+    sheets: [
+      {
+        properties: {
+          title: 'Logs',
+          gridProperties: {
+            columnCount: 4,
+            frozenRowCount: 1
           }
-        },
-      ]
-    }
+        }
+      }
+    ]
+  };
 }
 
 

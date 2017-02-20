@@ -11,7 +11,7 @@ import 'rxjs/add/observable/of';
 import {GAPI_LOGIN, actionAuthResult} from '../store/drive/reducers';
 import conf from '../conf';
 
-
+/* global gapi */
 
 export function checkAuth(scopes, clientId, inmediate) {
   return gapi.auth.authorize({
@@ -37,13 +37,13 @@ export default function gdriveAuth(action$) {
         .fromPromise(checkAuth(conf.SCOPES, conf.GAPI_UID, when))
         .catch(e => {
           return Observable.of({error: true});
-        })
+        });
     })
     .switchMap(result =>
         (result && !result.error) ? loadDriveClient(result) : Observable.of(result))
     .map(result => {
       if (result && !result.error) {
-        return actionAuthResult('success')
+        return actionAuthResult('success');
       }
       return actionAuthResult('failure');
     });

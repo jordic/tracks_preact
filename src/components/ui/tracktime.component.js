@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/startWith';
+// import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/timer';
 
 
@@ -38,7 +38,7 @@ export class ClockItem extends Component {
     }
     this.subs = Observable
       .timer(0, 1000)
-      .startWith(1)
+      // .startWith(1)
       .map(m => (props.time + (current()) - props.last))
       .subscribe(current => {
         this.setState({current});

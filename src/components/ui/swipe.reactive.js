@@ -5,7 +5,7 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/skipWhile';
 import 'rxjs/add/operator/takeLast';
 import 'rxjs/add/operator/takeWhile';
@@ -35,7 +35,7 @@ const stream$ = (el, effect) => {
 
   return start$
     .map(coords)
-    .mergeMap(({x, y}) => move$
+    .switchMap(({x, y}) => move$
       .skipWhile(treshold(x, y))
       .takeWhile(vtreshold(y))
       .takeUntil(end$)
@@ -93,7 +93,7 @@ export class Swipe extends Component {
 
 
   render(props, {success}) {
-    let [Front, Back] = props.children
+    let [Front, Back] = props.children;
     Front.attributes.ref = (r) => this.front = r
     let css = (success) ? ' remove' : '';
     return (
