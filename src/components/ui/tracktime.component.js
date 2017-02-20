@@ -47,7 +47,7 @@ export class ClockItem extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (props.status != this.props.status) {
+    if (props.status !== this.props.status || props.time !== this.props.time) {
       this.start(props);
     }
   }
