@@ -30,7 +30,8 @@ module.exports = {
       store: path.resolve(__dirname, "src/store"),    // used for tests
       style: path.resolve(__dirname, "src/style"),
       'react': 'preact',
-      'react-dom': 'preact'
+      'react-dom': 'preact',
+      'react-redux': 'preact-redux'
     },
     modules: [
       path.resolve(__dirname, "src/lib"),
