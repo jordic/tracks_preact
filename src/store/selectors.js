@@ -30,9 +30,9 @@ const amountByDay = list => {
   const last = calcDay(list[list.length - 1].time);
   // we want to fill day by day..
   const days = range(last, first + day, day).reduce((o, b) => {
-      o[b] = 0;
-      return o;
-      }, {});
+    o[b] = 0;
+    return o;
+  }, {});
 
   return list.reduce((acc, el) => {
     let d = calcDay(el.time);
@@ -54,6 +54,11 @@ export const getTimeToday = (logsEntities, track) => {
       el.trackId === track.id &&
       (el.action === 'stop' || el.action === 'track'))
     .reduce((a, b) => a + b.amount, 0);
+};
+
+const debug = (l) => {
+  console.log(l);
+  return l;
 };
 
 export const dataForTrack = (id) => (state) => {
@@ -81,9 +86,9 @@ export const homeTracks = (state) =>
   state.tracks
       .map(id => state.tracksEntities[id])
       .map(obj => Object.assign({}, obj, {
-          today: getTimeToday(state.logsEntities, obj)
+        today: getTimeToday(state.logsEntities, obj)
       }))
-      .reverse()
+      .reverse();
 
 
 

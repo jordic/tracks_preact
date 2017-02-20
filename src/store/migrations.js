@@ -9,6 +9,8 @@
 
 export function migrateStore(state) {
 
+  // console.log(state);
+
   let i = 1;
   // look for missing track events
   let without = withoutAction(state);
@@ -19,24 +21,30 @@ export function migrateStore(state) {
 
   without.map(a => {
     let act = action(a, time, i++);
-    logs.push(act);
-    entities = {
-      [act.id]: act
-    };
+    logs.push(act.id);
+    entities[act.id] = act;
   });
+
+  // console.log("logs", logs, entities);
 
   return Object.assign({}, state, {
     logs: [...logs, ...state.logs],
-    logsEntities: Object.assign({}, state.logsEntities, entities)
+    logsEntities: Object.assign({}, state.logsEntities, entities),
+    version: 1
   });
 }
 
+
+const debug = (l) => {
+  console.log(l);
+  return l;
+};
 
 export function withoutAction(state) {
   const tracks = state.tracks;
   let already = state.logs
     .map(l => state.logsEntities[l])
-    .filter(l => l.action === 'track_add')
+    .filter(l => l && l.action === 'track_add')
     .map(l => l.trackId);
 
   return tracks.filter(a => !already.includes(a));
@@ -44,7 +52,8 @@ export function withoutAction(state) {
 
 
 const firstTime = (state) => {
-  return state.logsEntities[state.logs[0]].time;
+  let i = 0;
+  return state.logsEntities[state.logs[i]].time;
 };
 
 
