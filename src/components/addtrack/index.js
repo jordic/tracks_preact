@@ -80,13 +80,13 @@ export default class AddTrack extends Component {
         <div
           className={'ele ' + (kind=='counter' ? 'enabled' : '')}
           onClick={ this.setCounter  }>
-          <img src="./assets/counter.svg" />
+          <img src="./assets/counter.svg" alt="counter icon" />
           <label>Counter</label>
         </div>
         <div
           className={'ele ' + (kind=='timer' ? 'enabled' : '')}
           onClick={ this.setTimer }>
-          <img src="./assets/timer.svg" />
+          <img src="./assets/timer.svg" alt="timer icon" />
           <label>Timer</label>
         </div>
       </div>
