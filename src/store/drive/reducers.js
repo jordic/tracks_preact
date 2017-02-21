@@ -102,7 +102,8 @@ export function driveReducer(state = initial, action) {
 
     case APP_OFFLINE: {
       return Object.assign({}, state, {
-        network: 'offline'
+        network: 'offline',
+        authState: ''
       });
     }
 

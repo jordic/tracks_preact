@@ -38,10 +38,10 @@ if (navigator && navigator.onLine) {
 if (window) {
   window.addEventListener('online', () => {
     store.dispatch({type: APP_ONLINE});
-  });
+  }, false);
   window.addEventListener('offline', () => {
     store.dispatch({type: APP_OFFLINE});
-  });
+  }, false);
 }
 
 
