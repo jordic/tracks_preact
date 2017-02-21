@@ -1,13 +1,7 @@
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-// import 'rxjs/add/observable/concat';
-// import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/of';
-// import 'rxjs/add/operator/switch';
-// import 'rxjs/add/operator/merge';
-import 'rxjs/add/operator/do';
-
 import 'rxjs/add/observable/never';
 import 'rxjs/add/observable/fromPromise';
 
@@ -17,7 +11,7 @@ import * as action from '../store/actions';
 
 const FILE = 'tracks.json';
 
-
+/* global gapi */
 
 
 export function syncStoreToDrive(action$, store) {
@@ -41,9 +35,8 @@ export function syncStoreToDriveOk(action$, store) {
   return action$.ofType(action.SYNC_STORE_OK)
     .switchMap(s =>
       Observable.fromPromise(upload(store.getState()))
-        .do(a => console.log('sync store ok'))
         .switchMap(o => Observable.never())
-    )
+    );
 }
 
 
@@ -76,8 +69,8 @@ const prepare = function() {
       fields: 'files(id,modifiedTime)'
     }).then(resp => {
       return delve(resp, 'result.files.0.id') || create();
-    })
-}
+    });
+};
 
 export const load = () => {
   return prepare().then(id => {
@@ -85,9 +78,9 @@ export const load = () => {
       .get({fileId: id, alt: 'media'})
       .then(resp => {
         return delve(resp, 'result')
-      })
+      });
   });
-}
+};
 
 
 export const upload = (state) => {
@@ -99,7 +92,7 @@ export const upload = (state) => {
       body: JSON.stringify(state)
     })
   );
-}
+};
 
 
 window.prepare = prepare;

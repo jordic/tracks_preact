@@ -50,12 +50,13 @@ export function reducerSyncState(state, action) {
 
 export const selectTracks = (tracks, state, rstate) => {
 
-  let ent = {}
+  let ent = {};
   tracks.map(el => {
-    if(!state[el] || !rstate[el]) {
+    if (!state[el] || !rstate[el]) {
       ent[el] = (rstate[el]) ? rstate[el] : state[el];
     } else {
-      if(rstate[el].lastRecord >= state[el].lastRecord) {
+
+      if (rstate[el].lastRecord >= state[el].lastRecord) {
         ent[el] = rstate[el];
       } else {
         ent[el] = state[el];
@@ -87,7 +88,7 @@ const recalc = (logs, track) => {
 
 const getActions = (logs, entities) => {
   let toDelete = [], toAdd = [];
-  console.log("actions", logs, entities);
+  // console.log("actions", logs, entities);
   logs.forEach(v => {
     let log = entities[v];
     if (!log) return;

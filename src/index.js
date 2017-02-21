@@ -4,11 +4,11 @@ import { h, render } from 'preact';
 import './style';
 import { Provider } from 'preact-redux';
 
-import configureStore from './configureStore'
+import configureStore from './configureStore';
 
 import { loadGAPIClient } from './lib/drive/load_gapi';
 import { requestIdle } from './lib/utils';
-import { GAPI_LOGIN } from './store/drive/reducers';
+import { GAPI_LOGIN, APP_ONLINE, APP_OFFLINE} from './store/drive/reducers';
 import conf from './conf';
 
 import * as sync from './epics/driveSync';
@@ -18,17 +18,31 @@ let store = configureStore();
 
 // idle work after boot
 // try to swap it for a delayed execution
-setTimeout(() => requestIdle(() => {
-  const drive = loadGAPIClient(conf.GJS_CLIENT);
-  drive.then(() => {
-    store.dispatch({type: GAPI_LOGIN});
-  });
-}), 500);
+// setTimeout(() => requestIdle(() => {
+//   const drive = loadGAPIClient(conf.GJS_CLIENT);
+//   drive.then(() => {
+//     store.dispatch({type: GAPI_LOGIN});
+//   });
+// }), 500);
 
 
 // import generateData from './store/fixtures';
 
 // generateData('1486664115333-1002', store);
+if (navigator && navigator.onLine) {
+  store.dispatch({type: APP_ONLINE});
+} else {
+  store.dispatch({type: APP_OFFLINE});
+}
+
+if (window) {
+  window.addEventListener('online', () => {
+    store.dispatch({type: APP_ONLINE});
+  });
+  window.addEventListener('offline', () => {
+    store.dispatch({type: APP_OFFLINE});
+  });
+}
 
 
 // Bootstrap app

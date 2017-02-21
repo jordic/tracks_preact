@@ -5,6 +5,9 @@ export const GAPI_LOGIN = 'GAPI_LOGIN';
 export const GAPI_RESULT = 'GAPI_RESULT';
 export const EXPORT_SHEET = 'EXPORT_SHEET';
 export const EXPORT_SHEET_OK = 'EXPORT_SHEET_OK';
+export const APP_OFFLINE = 'APP_OFFLINE';
+export const APP_ONLINE = 'APP_ONLINE';
+
 
 
 export function actionExportSheet(track) {
@@ -43,7 +46,8 @@ const initial = {
   exporting: false,
   trackId: '',
   exportStatus: '',
-  syncing: false
+  syncing: false,
+  network: 'offline'
 };
 
 
@@ -90,7 +94,17 @@ export function driveReducer(state = initial, action) {
       });
     }
 
+    case APP_ONLINE: {
+      return Object.assign({}, state, {
+        network: 'online'
+      });
+    }
 
+    case APP_OFFLINE: {
+      return Object.assign({}, state, {
+        network: 'offline'
+      });
+    }
 
   }
   return state;

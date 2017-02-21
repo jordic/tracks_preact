@@ -36,7 +36,9 @@ export default class TrackList extends Component {
 
   delete = (id) => (ev) => {
     this.props.trackDelete(id);
-    ev.stopPropagation();
+    if (ev) {
+      ev.stopPropagation();
+    }
   }
 
   trackClick = (id) => (ev) => {
