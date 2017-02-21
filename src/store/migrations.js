@@ -30,7 +30,7 @@ export function migrateStore(state) {
   return Object.assign({}, state, {
     logs: [...logs, ...state.logs],
     logsEntities: Object.assign({}, state.logsEntities, entities),
-    version: 1
+    app: {version: 1, notifyNews: true}
   });
 }
 

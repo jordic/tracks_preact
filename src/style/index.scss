@@ -1,4 +1,4 @@
-@import 'normalizer';
+// @import 'normalizer';
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -14,49 +14,49 @@ $white: #fff;
 $tablet: "min-width: 768px";
 
 
-html {
-  width: 100%;
-  height: 100%;
-  text-size-adjust: 100%;
-  background-color: $background;
-}
+// html {
+//   width: 100%;
+//   height: 100%;
+//   text-size-adjust: 100%;
+//   background-color: $background;
+// }
 
-body, div {
-  box-sizing: border-box;
-}
+// body, div {
+//   box-sizing: border-box;
+// }
 
-body {
-  color: $initial;
-  font-family: -apple-system, "Roboto", "Helvetica Neue", sans-serif;
-  margin: 0px;
-  position:relative;
-  height: 100%;
-  overflow: hidden;
-  overflow-y: auto;
+// body {
+//   color: $initial;
+//   font-family: -apple-system, "Roboto", "Helvetica Neue", sans-serif;
+//   margin: 0px;
+//   position:relative;
+//   height: 100%;
+//   overflow: hidden;
+//   overflow-y: auto;
 
-}
+// }
 
-h1,h2,h3,h4 {
-  font-weight: normal;
-  margin-bottom: 0px;
-}
+// h1,h2,h3,h4 {
+//   font-weight: normal;
+//   margin-bottom: 0px;
+// }
 
-#app {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
+// #app {
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+//   overflow: hidden;
+// }
 
-.view {
-  display: block;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  left: 0px;
-  bottom: 0px;
-  will-change: transform;
-}
+// .view {
+//   display: block;
+//   position: absolute;
+//   top: 0px;
+//   right: 0px;
+//   left: 0px;
+//   bottom: 0px;
+//   will-change: transform;
+// }
 
 
 @import 'parts/layout';

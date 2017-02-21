@@ -148,13 +148,39 @@ function reducerTrackEntities(state, action) {
   return state;
 }
 
+const appInitial = {
+  version: 0,
+  notifyNews: false
+};
+
+function appReducer(state=appInitial, action) {
+
+  switch (action.type) {
+  case actions.SHOW_NEWS: {
+    return Object.assign({}, state, {
+      notifyNews: true
+    });
+  }
+
+  case actions.HIDE_NEWS: {
+    return Object.assign({}, state, {
+      notifyNews: false
+    });
+  }
+
+  }
+  return state;
+}
+
+
 export function reducer(state = initialState, action) {
   let r = reducerTracks(state, action);
   r = reducerSyncState(r, action);
   let drive = driveReducer(r.drive, action);
   let tracksEntities = reducerTrackEntities(r.tracksEntities, action);
+  let app = appReducer(r.app, action);
   // console.log(state.tracksEntities);
-  return Object.assign({}, r, { drive, tracksEntities });
+  return Object.assign({}, r, { drive, tracksEntities, app });
 }
 
 export function logsForTrack(entities, trackId) {

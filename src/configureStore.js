@@ -20,7 +20,7 @@ function cleanStore(istate) {
 let istate = loadState();
 // console.log(istate);
 // istate = cleanStore(istate);
-if (istate && !istate.version) {
+if (istate && !istate.app && istate.tracks.length > 0) {
   istate = migrateStore(istate);
 }
 
@@ -41,9 +41,9 @@ export default function configureStore() {
   window.store = store;
 
   store.subscribe(() => {
-    let {tracks, tracksEntities, logs, logsEntities, version} = store.getState();
+    let {tracks, tracksEntities, logs, logsEntities, version, app} = store.getState();
     saveState({
-      tracks, tracksEntities, logs, logsEntities, version
+      tracks, tracksEntities, logs, logsEntities, version, app
     });
   });
   return store;

@@ -1,20 +1,4 @@
 header {
-  display: block;
-  background-color: currentColor;
-  border-radius: 0px 0px 30px 30px;
-  height: 120px;
-  position: relative;
-
-  h1 {
-    font-size: 1.5em;
-    box-sizing: border-box;
-    color: #fff;
-    padding-top: 20px;
-    margin-top: 0px;
-    margin-bottom: 50px;
-    font-weight: normal;
-    text-align: center;
-  }
 
   img {
     margin-top: 20px;
@@ -38,9 +22,9 @@ header {
 .header__reload {
   background-color: transparent;
   position: absolute;
-  right: 30px;
+  right: 20px;
   color: #fff;
-  top: 22px;
+  top: 15px;
   width: 32px;
   height: 32px;
   transform: scale(0.7, 0.7);
@@ -101,11 +85,21 @@ app-fab {
 }
 
 hr {
-  border-bottom: 2px solid currentColor;
+  border-bottom: 1px solid #eaeaea;
   width: 80%;
   opacity: 0.8;
 }
 
 .track_list {
   width: 100%;
+}
+
+
+button {
+  font-weight: bolder;
+  border-radius: 5px;
+  background-color: #1695a3;
+  color: #fff;
+  padding: 8px 25px 8px 25px;
+  font-size: 1em;
 }

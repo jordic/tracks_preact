@@ -5,7 +5,7 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/skipWhile';
 import 'rxjs/add/operator/takeLast';
 import 'rxjs/add/operator/takeWhile';
@@ -35,7 +35,7 @@ const stream$ = (el, effect) => {
 
   return start$
     .map(coords)
-    .switchMap(({x, y}) => move$
+    .mergeMap(({x, y}) => move$
       .skipWhile(treshold(x, y))
       .takeWhile(vtreshold(y))
       .takeUntil(end$)

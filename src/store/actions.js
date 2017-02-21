@@ -10,17 +10,19 @@ export const TRACK_DELETE = 'TRACK_DELETE';
 export const LOAD_STORE = 'LOAD_STORE';
 export const SYNC_STORE = 'SYNC_STORE';
 export const SYNC_STORE_OK = 'SYNC_STORE_OK';
+export const SHOW_NEWS = 'SHOW_NEWS';
+export const HIDE_NEWS = 'HIDE_NEWS';
 
 export const now = () => (new Date()).getTime();
 
 export function addTrack(p, time = now(), logId=undefined) {
-  console.log("track add", p, time, logId)
+  // console.log("track add", p, time, logId);
   return {
     type: TRACK_ADD,
     payload: {
       kind: p,
-      time: time,
-      logId: logId
+      time,
+      logId
     }
   };
 }
@@ -30,7 +32,7 @@ export function syncStore(time = now()) {
   return {
     type: SYNC_STORE,
     payload: {
-      time: time
+      time
     }
   }
 }
@@ -39,8 +41,8 @@ export function trackStart(id, time = now(), logId=undefined) {
   return {
     type: TRACK_START,
     payload: {
-      id: id,
-      time: time,
+      id,
+      time,
       logId
     }
   };
@@ -50,8 +52,8 @@ export function trackStop(id, time = now(), logId=undefined) {
   return {
     type: TRACK_STOP,
     payload: {
-      id: id,
-      time: time,
+      id,
+      time,
       logId
     }
   };
@@ -62,8 +64,8 @@ export function trackCount(id, time = now(), logId=undefined) {
   return {
     type: TRACK_COUNT,
     payload: {
-      id: id,
-      time: time,
+      id,
+      time,
       logId
     }
   };
@@ -74,10 +76,23 @@ export function trackDelete(id, time = now(), logId=undefined) {
   return {
     type: TRACK_DELETE,
     payload: {
-      id: id,
-      time: time,
+      id,
+      time,
       logId
     }
+  };
+}
+
+
+export function showNews() {
+  return {
+    type: SHOW_NEWS
+  };
+}
+
+export function hideNews() {
+  return {
+    type: HIDE_NEWS
   };
 }
 
@@ -102,7 +117,13 @@ export const mapDispatchToProps = (dispatch) => ({
     dispatch(gdrive.actionExportSheet(track));
   },
   syncStore() {
-    dispatch(syncStore())
+    dispatch(syncStore());
+  },
+  showNews() {
+    dispatch(showNews());
+  },
+  hideNews() {
+    dispatch(hideNews());
   }
 
-})
+});
